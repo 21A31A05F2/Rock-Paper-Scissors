@@ -1,0 +1,77 @@
+import random
+print("ROCK PAPER SCISSORS")
+print()
+print("Instructions")
+print("Rock beats scissors")
+print("Paper beats Rock")
+print("Scissors beats Paper")
+print()
+print("You score points if:")
+print("Your input is Rock and System input is Scissors")
+print("Your input is Paper and System input is Rock")
+print("Your input is Scissors and System input is Paper")
+print("If it is a TIE Both will score points")
+def select(user_score,sys_score,rounds):
+    print()
+    print("Select any one of the following:")
+    print("Rock")
+    print("Paper")
+    print("Scissors")
+    print()
+    print("Enter Your choice:",end=" ")
+    user=input()
+    user=user.upper()
+    if user=='ROCK':
+        user_choice=1
+    elif user=='PAPER':
+        user_choice=2
+    elif user=='SCISSORS':
+        user_choice=3
+    else:
+        print("Enter the correct choice")  
+        select(user_score,sys_score,rounds) 
+    rounds+=1
+    check(user_choice,system,user_score,sys_score,rounds)
+def play(user_score,sys_score,rounds):
+      print()
+      print("Do you want to continue to play")
+      print("If want to play Press 'Y'")
+      print("If you want to quit Press 'N'")
+      play=input()
+      if play=='Y':
+          select(user_score,sys_score,rounds)
+      else:
+          print("Your Score:",user_score)
+          print("Opponent Score",sys_score)
+          print("Total Rounds:",rounds)
+          if user_score>sys_score:
+              print("You won")
+              print("CONGRATULATIONS")
+              exit()
+          elif user_score<sys_score:
+              print("You Lost")
+              print("Better Luck Next Time")
+              exit()
+          else:
+              print("It's a Tie")
+              print("Congratulations")
+              exit()
+def check(choice,system,user_score,sys_score,rounds):
+    obj={1:"Rock",2:"Paper",3:"Scissors"}
+    print("User Choice:",obj[choice])
+    print("System Choice:",obj[system])
+    if choice==1 and system==3 or choice==2 and system==1 or choice==3 and system==2:
+      user_score+=1
+      print("You won this round")
+    elif choice==system:
+        user_score+=1
+        sys_score+=1
+        print("It's a tie")
+    else:
+        sys_score+=1
+        print("You Lost")
+    play(user_score,sys_score,rounds)
+user_score,sys_score,rounds=0,0,0
+inputs=[1,2,3]
+system=random.choice(inputs)
+select(user_score,sys_score,rounds)
